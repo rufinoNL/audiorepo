@@ -1,9 +1,12 @@
 package nl.rufino.daw.data.entity;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -33,14 +36,9 @@ public class MusicEntityTest {
 	}
 
 	@Test
-	public void testCheckDatabaseConnection() {
-		EntityTransaction transaction = em.getTransaction();
-		
+	public void test() {		
 		Query queryFindAll = em.createNamedQuery("MusicEntity.findAll");
-		Collection<MusicEntity> result = null;
-		assertNull(result);
-		
-		result = queryFindAll.getResultList();
+		Collection<MusicEntity> result = queryFindAll.getResultList();
 		
 		assertNotNull(result);
 	}

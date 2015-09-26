@@ -63,17 +63,12 @@ public class AudioFunctions {
 		return new File[] {cubaseNewBeateFile, reasonNewBeatFile};
 	}
 	
-	public static void analyzeAudioGenres(File folderToScan){
+	public static void addTrackNotes(File folderToScan){
 		File[] existingFolders = folderToScan.listFiles((FileFilter) DirectoryFileFilter.DIRECTORY);
 		
 		for (File file : existingFolders) {
 			File dataFile = new File(file.getAbsolutePath() + "\\Gereserveerd.txt");
 			String dataFileRead = WindowsFunctions.openFile(dataFile);
-			
-
 		}
-		
-		
-
 	}
 }

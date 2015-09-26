@@ -3,13 +3,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>nl.rufino.daw.data</groupId>
 	<artifactId>daw_data</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2</version>
 	<packaging>jar</packaging>
 
 	<parent>
 		<groupId>nl.rufino.daw</groupId>
 		<artifactId>daw_parent_pom</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 		<relativePath>../daw_parent_pom</relativePath>
 	</parent>
 
@@ -33,12 +33,7 @@
 	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-core</artifactId>
