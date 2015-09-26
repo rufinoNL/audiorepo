@@ -1,2 +1,6 @@
 RemoteSystemsTempFiles
 .metadata
+.settings
+.classpath
+.project
+target
