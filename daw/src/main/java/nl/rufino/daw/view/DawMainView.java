@@ -3,12 +3,6 @@ package nl.rufino.daw.view;
 import java.io.File;
 import java.io.IOException;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import nl.rufino.daw.main.Start;
-import nl.rufino.daw.util.AudioFunctions;
-import nl.rufino.daw.util.WindowsFunctions;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,6 +11,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import nl.rufino.daw.util.AudioFunctions;
+import nl.rufino.daw.util.WindowsFunctions;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.guigarage.flatterfx.FlatterFX;
 
 public class DawMainView extends Application{
 	static final Logger LOGGER = LogManager.getLogger(DawMainView.class);
@@ -65,11 +66,13 @@ public class DawMainView extends Application{
 		});
 		
 		VBox root = new VBox();
+
 		root.getChildren().addAll(lblText, btnStartCubaseReason);
 		
 		Scene scene = new Scene(root, 750, 1000);
 		stage.setScene(scene);
 		stage.show();
+		FlatterFX.style();
 	}
 
 }
