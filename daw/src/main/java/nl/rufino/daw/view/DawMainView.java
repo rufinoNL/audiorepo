@@ -36,7 +36,7 @@ public class DawMainView extends Application{
 	public void start(Stage stage) throws Exception {
 		lblText = new Label("");
 		btnStartCubaseReason = new Button("Start Cubase and Reason in ReWire");
-		
+
 		btnStartCubaseReason.setOnAction(new EventHandler<ActionEvent>(){
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -47,19 +47,15 @@ public class DawMainView extends Application{
 					lblText.setText("Starting Cubase...");
 					WindowsFunctions.startApplication("C:\\Program Files\\Steinberg\\Cubase 6\\Cubase6.exe", 
 							fileToStart[0].toString());
-					
 					//Wait 25 seconds for Reason to Start...
 					Thread.sleep(25000);
-					
 					lblText.setText("Starting Reason...");
 					WindowsFunctions.startApplication("C:\\Program Files\\Propellerhead\\Reason\\Reason.exe", 
 							fileToStart[1].toString());
 					
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
