@@ -1,4 +1,4 @@
-package nl.rufino.daw.util;
+package nl.rufino.util;
 
 import java.io.File;
 import java.io.FileFilter;
