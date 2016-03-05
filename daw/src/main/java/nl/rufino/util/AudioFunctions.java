@@ -2,8 +2,11 @@ package nl.rufino.util;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Properties;
 
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
 import org.apache.logging.log4j.LogManager;
@@ -15,10 +18,16 @@ public class AudioFunctions {
 	
 	public static File[] createNewTemplate(){
 		LOGGER.entry();
-		Integer newBeatNumber = 0;
+		
+		Properties propertiesFile = WindowsFunctions.retrieveProperties("config.properties");
+		String searchDirectory = propertiesFile.getProperty("audio.searchdirectory");
+		String templateDirectory = propertiesFile.getProperty("audio.templatedirectory");
+		String templateYear = propertiesFile.getProperty("audio.templateyear");
+		
+		Integer newBeatNumber;
 		String destDirName = "";
-		File searchDir = new File("Z:\\Filmic Music\\Muziek\\Beat 2015");
-		File srcDir = new File("Z:\\Filmic Music\\Muziek\\Beat 2015\\_Template");
+		File searchDir = new File(searchDirectory);
+		File srcDir = new File(templateDirectory);
 		File destDir;
 		File cubaseTemplateFile;
 		File cubaseNewBeateFile;
@@ -27,6 +36,31 @@ public class AudioFunctions {
 		
 		LOGGER.info("DAW template copying started");
 		LOGGER.info("Determining where to copy the files to...");
+		
+		//Determine the highest track number
+		newBeatNumber = determineNewBeatNumber(searchDir);
+		
+		LOGGER.info("Copying Cubase and Reason template files...");
+		destDir = new File(searchDir + "\\Beat" + (newBeatNumber) + "_" + templateYear + "");
+		
+		//Copying template directory
+		WindowsFunctions.copyDirectory(srcDir, destDir);
+
+		//Hernoemen van bestanden
+		cubaseTemplateFile = new File(destDir + "\\Cubase\\Template.cpr");
+		cubaseNewBeateFile = new File(destDir + "\\Cubase\\" + "Beat" + newBeatNumber + "_" + templateYear + "_Cubase1.cpr");
+		WindowsFunctions.renameFile(cubaseTemplateFile, cubaseNewBeateFile, newBeatNumber);
+		
+		reasonTemplateFile = new File(destDir + "\\Template.reason");
+		reasonNewBeatFile = new File(destDir + "\\" + "Beat" + newBeatNumber + "_" + templateYear + "_Reason1.reason");
+		WindowsFunctions.renameFile(reasonTemplateFile, reasonNewBeatFile, newBeatNumber);
+		
+		return new File[] {cubaseNewBeateFile, reasonNewBeatFile};
+	}
+
+	public static Integer determineNewBeatNumber(File searchDir) {
+		Integer newBeatNumber = 1;
+		String destDirName;
 		File[] existingFolders = searchDir.listFiles((FileFilter) DirectoryFileFilter.DIRECTORY);
 
 		Arrays.sort(existingFolders, Collections.reverseOrder());
@@ -45,22 +79,7 @@ public class AudioFunctions {
 			}
 			System.out.println("Directory: " + dir.getName());
 		}
-		LOGGER.info("Copying Cubase and Reason template files...");
-		destDir = new File(searchDir + "\\Beat" + (newBeatNumber) + "_2015");
-		
-		//Kopiëren van de template directory
-		WindowsFunctions.copyDirectory(srcDir, destDir);
-
-		//Hernoemen van bestanden
-		cubaseTemplateFile = new File(destDir + "\\Cubase\\Template.cpr");
-		cubaseNewBeateFile = new File(destDir + "\\Cubase\\" + "Beat" + newBeatNumber + "_2015_Cubase1.cpr");
-		WindowsFunctions.renameFile(cubaseTemplateFile, cubaseNewBeateFile, newBeatNumber);
-		
-		reasonTemplateFile = new File(destDir + "\\Template.reason");
-		reasonNewBeatFile = new File(destDir + "\\" + "Beat" + newBeatNumber + "_2015_Reason1.reason");
-		WindowsFunctions.renameFile(reasonTemplateFile, reasonNewBeatFile, newBeatNumber);
-		
-		return new File[] {cubaseNewBeateFile, reasonNewBeatFile};
+		return newBeatNumber;
 	}
 	
 	public static void addTrackNotes(File folderToScan){

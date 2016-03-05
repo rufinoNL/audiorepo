@@ -32,12 +32,14 @@ import com.guigarage.flatterfx.FlatterFX;
 public class MainView extends Application implements EventHandler<ActionEvent>{
 	static final Logger LOGGER = LogManager.getLogger(MainView.class);
 	
-	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("daw_data");
-	private EntityManager em = emf.createEntityManager();
+//  Currently commented out because database offline
+//	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("daw_data");
+//	private EntityManager em = emf.createEntityManager();
 	
 	private Label lblText;
 	private Button btnStartCubaseReason;
-	private MainViewData data = new MainViewData(em);
+	//  Currently commented out because database offline
+	//private MainViewData data = new MainViewData(em);
 	private TableView<MusicEntity> musicTable;
 
 	//Start program
@@ -56,19 +58,19 @@ public class MainView extends Application implements EventHandler<ActionEvent>{
 		btnStartCubaseReason.setText("Start Cubase and Reason in ReWire");
 		btnStartCubaseReason.setOnAction(this);
 		
-		//Column for musicId
+		//Column for id
 		TableColumn<MusicEntity, Integer> musicIdColumn = new TableColumn<>("Id");
 		musicIdColumn.setMinWidth(15);
-		musicIdColumn.setCellValueFactory(new PropertyValueFactory<>("musicid"));	
+		musicIdColumn.setCellValueFactory(new PropertyValueFactory<>("musicid"));
 		
-		//Column for musicId
+		//Column for track name
 		TableColumn<MusicEntity, Integer> trackNameColumn = new TableColumn<>("Track name");
-		trackNameColumn.setMinWidth(100);
-		trackNameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));	
-		
+		trackNameColumn.setMinWidth(200);
+		trackNameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
+//      Currently commented out because database offline		
 		musicTable = new TableView<MusicEntity>();
-		musicTable.setItems(data.getMusic());
-		musicTable.getColumns().addAll(musicIdColumn, trackNameColumn);
+//		musicTable.setItems(data.getMusic());
+//		musicTable.getColumns().addAll(musicIdColumn, trackNameColumn);
 		
 		VBox root = new VBox();
 

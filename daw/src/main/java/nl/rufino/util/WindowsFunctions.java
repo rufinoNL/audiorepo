@@ -2,6 +2,8 @@ package nl.rufino.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
@@ -41,5 +43,23 @@ public class WindowsFunctions {
 	public static void startApplication(String executablePath, String fileToOpen) throws IOException{
 		//Start program
 		new ProcessBuilder(executablePath, fileToOpen).start();
+	}
+	
+	public static Properties retrieveProperties(String fileName){
+		Properties properties = new Properties();
+		
+		InputStream inputStream = AudioFunctions.class.getClassLoader().getResourceAsStream(fileName);
+		
+		if(inputStream != null){
+			try {
+				properties.load(inputStream);
+			} catch (IOException e) {
+				LOGGER.error(e);
+			}
+		}else{
+			LOGGER.warn("File not found");
+		}
+		
+		return properties;
 	}
 }
