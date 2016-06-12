@@ -47,6 +47,7 @@ public class MainView extends Application implements EventHandler<ActionEvent>{
 		launch(args);
 	}
 	
+	//Testing Git
 	@Override
 	public void start(Stage stage) throws Exception {
 		//Set style
