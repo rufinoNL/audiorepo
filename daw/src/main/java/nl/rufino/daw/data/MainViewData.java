@@ -19,13 +19,12 @@ public class MainViewData {
 		this.em = em;
 	}
 	
-	//Done from GIT-TEST-02
 	//Testing git repo via SoureTree
 	public ObservableList<MusicEntity> getMusic(){
 		ObservableList<MusicEntity> musicList = FXCollections.observableArrayList();
 		Query queryFindAll = em.createNamedQuery("MusicEntity.findAll");
 		Collection<MusicEntity> result  = queryFindAll.getResultList();
-		System.out.println("Done from GIT-TEST-01 feature branch");
+		
 		musicList.addAll(result);
 		return musicList;
 	}
