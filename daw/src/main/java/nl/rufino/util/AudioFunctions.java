@@ -2,8 +2,6 @@ package nl.rufino.util;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Properties;
@@ -24,8 +22,7 @@ public class AudioFunctions {
 		String templateDirectory = propertiesFile.getProperty("audio.templatedirectory");
 		String templateYear = propertiesFile.getProperty("audio.templateyear");
 		
-		Integer newBeatNumber;
-		String destDirName = "";
+		String newBeatNumber;
 		File searchDir = new File(searchDirectory);
 		File srcDir = new File(templateDirectory);
 		File destDir;
@@ -49,37 +46,51 @@ public class AudioFunctions {
 		//Hernoemen van bestanden
 		cubaseTemplateFile = new File(destDir + "\\Cubase\\Template.cpr");
 		cubaseNewBeateFile = new File(destDir + "\\Cubase\\" + "Beat" + newBeatNumber + "_" + templateYear + "_Cubase1.cpr");
-		WindowsFunctions.renameFile(cubaseTemplateFile, cubaseNewBeateFile, newBeatNumber);
+		WindowsFunctions.renameFile(cubaseTemplateFile, cubaseNewBeateFile);
 		
 		reasonTemplateFile = new File(destDir + "\\Template.reason");
 		reasonNewBeatFile = new File(destDir + "\\" + "Beat" + newBeatNumber + "_" + templateYear + "_Reason1.reason");
-		WindowsFunctions.renameFile(reasonTemplateFile, reasonNewBeatFile, newBeatNumber);
+		WindowsFunctions.renameFile(reasonTemplateFile, reasonNewBeatFile);
 		
 		return new File[] {cubaseNewBeateFile, reasonNewBeatFile};
 	}
 
-	public static Integer determineNewBeatNumber(File searchDir) {
-		Integer newBeatNumber = 1;
-		String destDirName;
-		File[] existingFolders = searchDir.listFiles((FileFilter) DirectoryFileFilter.DIRECTORY);
+	public static String determineNewBeatNumber(File searchDir) {
+		Integer newBeatNumber = determineHighestBeatFolder(searchDir);
+		StringBuffer newBeatNummer = addLeadingZeros(newBeatNumber);
+		return newBeatNummer.toString();
+	}
 
+	public static Integer determineHighestBeatFolder(File searchDir) {
+		File[] existingFolders = searchDir.listFiles((FileFilter) DirectoryFileFilter.DIRECTORY);
+		Integer beatNumber = 1;
 		Arrays.sort(existingFolders, Collections.reverseOrder());
 		
 		for (File dir : existingFolders) {
+			String destDirName;
 			destDirName = dir.getName();
 
 			if(destDirName.startsWith("Beat")){
 				int indexOfUnderscore = destDirName.indexOf("_");
 
-				newBeatNumber = Integer.valueOf(destDirName.substring(4, indexOfUnderscore));
+				beatNumber = Integer.valueOf(destDirName.substring(4, indexOfUnderscore));
 
-				newBeatNumber++;
-				LOGGER.info("Highest beat number is: " + newBeatNumber);
+				beatNumber++;
+				LOGGER.info("Highest beat number is: " + beatNumber);
 				break;
 			}
-			System.out.println("Directory: " + dir.getName());
+			LOGGER.info("Directory: " + dir.getName());
 		}
-		return newBeatNumber;
+		return beatNumber;
+	}
+
+	public static StringBuffer addLeadingZeros(Integer number) {
+		StringBuffer newBeatNummer = new StringBuffer();
+		if(number < 10){
+			newBeatNummer.append("0");
+		}
+		newBeatNummer.append(number.toString());
+		return newBeatNummer;
 	}
 	
 	public static void addTrackNotes(File folderToScan){

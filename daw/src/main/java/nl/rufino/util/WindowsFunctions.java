@@ -13,7 +13,7 @@ public class WindowsFunctions {
 	
 	static final Logger LOGGER = LogManager.getLogger(WindowsFunctions.class);
 	
-	public static void renameFile(File oldFileName, File newFileName,Integer newBeatNumber) {
+	public static void renameFile(File oldFileName, File newFileName) {
 		oldFileName.renameTo(newFileName);
 		LOGGER.info("Renamed file: " + oldFileName.toString() + " to " + newFileName.toString());
 	}
