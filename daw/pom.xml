@@ -9,7 +9,7 @@
 	<parent>
 		<groupId>nl.rufino.daw</groupId>
 		<artifactId>daw_parent_pom</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.2</version>
 		<relativePath>../daw_parent_pom</relativePath>
 	</parent>
 
@@ -39,6 +39,10 @@
 			<artifactId>daw_data</artifactId>
 			<version>0.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -50,7 +54,6 @@
 					<source>${maven.compiler.source}</source>
 					<target>${maven.compiler.target}</target>
 				</configuration>
-
 			</plugin>
 		</plugins>
 	</build>
