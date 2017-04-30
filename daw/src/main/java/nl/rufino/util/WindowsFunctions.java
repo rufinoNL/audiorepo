@@ -6,12 +6,12 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class WindowsFunctions {
 	
-	static final Logger LOGGER = LogManager.getLogger(WindowsFunctions.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(WindowsFunctions.class);
 	
 	public static void renameFile(File oldFileName, File newFileName) {
 		oldFileName.renameTo(newFileName);
@@ -54,7 +54,7 @@ public class WindowsFunctions {
 			try {
 				properties.load(inputStream);
 			} catch (IOException e) {
-				LOGGER.error(e);
+				LOGGER.error("Problem retrieving properties", e);
 			}
 		}else{
 			LOGGER.warn("File not found");

@@ -7,15 +7,15 @@ import java.util.Collections;
 import java.util.Properties;
 
 import org.apache.commons.io.filefilter.DirectoryFileFilter;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class AudioFunctions {
 	
-	private static final Logger LOGGER = LogManager.getLogger(AudioFunctions.class);
+	static final Logger LOGGER = LoggerFactory.getLogger(AudioFunctions.class);
 	
 	public static File[] createNewTemplate(){
-		LOGGER.entry();
+		LOGGER.info("Started");
 		
 		Properties propertiesFile = WindowsFunctions.retrieveProperties("config.properties");
 		String searchDirectory = propertiesFile.getProperty("audio.searchdirectory");

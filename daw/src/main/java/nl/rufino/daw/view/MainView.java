@@ -3,6 +3,11 @@ package nl.rufino.daw.view;
 import java.io.File;
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.guigarage.flatterfx.FlatterFX;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,23 +19,12 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import nl.rufino.daw.data.MainViewData;
 import nl.rufino.daw.data.entity.MusicEntity;
 import nl.rufino.util.AudioFunctions;
 import nl.rufino.util.WindowsFunctions;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import com.guigarage.flatterfx.FlatterFX;
-
 public class MainView extends Application implements EventHandler<ActionEvent>{
-	static final Logger LOGGER = LogManager.getLogger(MainView.class);
+	static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
 	
 //  Currently commented out because database offline
 //	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("daw_data");
@@ -46,8 +40,7 @@ public class MainView extends Application implements EventHandler<ActionEvent>{
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	//Testing Git
+
 	@Override
 	public void start(Stage stage) throws Exception {
 		//Set style
