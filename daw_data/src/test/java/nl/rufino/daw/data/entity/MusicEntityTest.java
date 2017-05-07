@@ -22,25 +22,25 @@ public class MusicEntityTest {
 	private EntityManager em;
 	private EntityManagerFactory emf;
 
-	@Before
-	public void setUp() throws Exception {
-		emf = Persistence.createEntityManagerFactory("daw_data");
-		em = emf.createEntityManager();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		System.out.println("Tearing down");
-		em.close();
-		emf.close();
-	}
-
-	@Test
-	public void test() {		
-		Query queryFindAll = em.createNamedQuery("MusicEntity.findAll");
-		Collection<MusicEntity> result = queryFindAll.getResultList();
-		
-		assertNotNull(result);
-	}
+//	@Before
+//	public void setUp() throws Exception {
+//		emf = Persistence.createEntityManagerFactory("daw_data");
+//		em = emf.createEntityManager();
+//	}
+//
+//	@After
+//	public void tearDown() throws Exception {
+//		System.out.println("Tearing down");
+//		em.close();
+//		emf.close();
+//	}
+//
+//	@Test
+//	public void test() {		
+//		Query queryFindAll = em.createNamedQuery("MusicEntity.findAll");
+//		Collection<MusicEntity> result = queryFindAll.getResultList();
+//		
+//		assertNotNull(result);
+//	}
 
 }
