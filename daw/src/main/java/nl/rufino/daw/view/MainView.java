@@ -27,41 +27,29 @@ import nl.rufino.util.WindowsFunctions;
 public class MainView extends Application implements EventHandler<ActionEvent>{
 	
 	static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
-	
-//	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("daw_data");
-//	private EntityManager em = emf.createEntityManager();
-	
 	private Label lblMessages;
 	private Button btnStartCubaseReason;
-	//  Currently commented out because database offline
+	private TableView<MusicEntity> musicTable = new TableView<MusicEntity>();
+	private String audioApplicationReason = WindowsFunctions.retrieveProperties("config.properties").getProperty("audio.application.reason");
+	private String audioApplicationCubase = WindowsFunctions.retrieveProperties("config.properties").getProperty("audio.application.cubase");
+	
+	//private EntityManagerFactory emf = Persistence.createEntityManagerFactory("daw_data");
+	//private EntityManager em = emf.createEntityManager();
 	//private MainViewData data = new MainViewData(em);
-	private TableView<MusicEntity> musicTable;
 
-	private String audioApplicationReason;
-	private String audioApplicationCubase;
 
 	public static void main(String[] args) {
 		launch(args);
 	}
 
 	@Override
-	public void start(Stage stage) throws Exception {
-		//Set style
-		FlatterFX.style();
-		
+	public void start(Stage stage) throws Exception {	
 		setupView();
-
-		//Column for id
-		TableColumn<MusicEntity, Integer> musicIdColumn = new TableColumn<>("Id");
-		musicIdColumn.setMinWidth(15);
-		musicIdColumn.setCellValueFactory(new PropertyValueFactory<>("musicid"));
-		
-		//Column for track name
-		TableColumn<MusicEntity, Integer> trackNameColumn = new TableColumn<>("Track name");
-		trackNameColumn.setMinWidth(200);
-		trackNameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
 		configureTable();
-		
+		loadScreen(stage);
+	}
+
+	private void loadScreen(Stage stage) {
 		VBox root = new VBox();
 		root.getChildren().addAll(lblMessages, btnStartCubaseReason, musicTable);
 		
@@ -85,6 +73,7 @@ public class MainView extends Application implements EventHandler<ActionEvent>{
 			message("Starting Reason...");
 			WindowsFunctions.startApplication(audioApplicationReason, 
 					filesToStart[1].toString());
+			message("");
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -94,6 +83,8 @@ public class MainView extends Application implements EventHandler<ActionEvent>{
 	}
 	
 	private void setupView() {
+		//Set style
+		FlatterFX.style();
 		configureLabelForMessages();
 		configureStartButton();
 	}
@@ -106,12 +97,20 @@ public class MainView extends Application implements EventHandler<ActionEvent>{
 	private void configureStartButton() {
 		btnStartCubaseReason = new Button();
 		btnStartCubaseReason.setText("Start Cubase and Reason in ReWire");
-		btnStartCubaseReason.setOnAction(this);
+		btnStartCubaseReason.setOnAction(this); //fires handle
 	}
 	
 	private void configureTable() {
-		//Currently commented out because database offline		
-		musicTable = new TableView<MusicEntity>();
+		//Column for id
+		TableColumn<MusicEntity, Integer> musicIdColumn = new TableColumn<>("Id");
+		musicIdColumn.setMinWidth(15);
+		musicIdColumn.setCellValueFactory(new PropertyValueFactory<>("musicid"));
+		
+		//Column for track name
+		TableColumn<MusicEntity, Integer> trackNameColumn = new TableColumn<>("Track name");
+		trackNameColumn.setMinWidth(200);
+		trackNameColumn.setCellValueFactory(new PropertyValueFactory<>("trackName"));
+		
 		//musicTable.setItems(data.getMusic());
 		//musicTable.getColumns().addAll(musicIdColumn, trackNameColumn);
 	}
