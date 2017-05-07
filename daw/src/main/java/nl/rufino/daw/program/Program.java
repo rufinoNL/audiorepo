@@ -1,4 +1,4 @@
-package nl.rufino.daw.view;
+package nl.rufino.daw.program;
 
 import java.io.File;
 import java.io.IOException;

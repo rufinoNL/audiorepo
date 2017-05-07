@@ -93,7 +93,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>nl.rufino.daw.view.MainView</mainClass>
+							<mainClass>nl.rufino.daw.program.Program</mainClass>
 						</manifest>
 						<manifestEntries>
 							<Class-Path>${project.build.directory}/classes/lib</Class-Path>
