@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>nl.rufino.daw.automation</groupId>
+	<groupId>nl.rufino.daw</groupId>
 	<artifactId>daw</artifactId>
 	<version>0.0.2</version>
 	<packaging>jar</packaging>
@@ -53,6 +53,7 @@
 
 	<build>
 		<plugins>
+		
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
@@ -61,9 +62,11 @@
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
+				<version>3.0.0</version>
 				<executions>
 					<execution>
 						<id>copy-dependencies</id>
@@ -72,14 +75,15 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${project.build.directory}/lib</outputDirectory>
-							<overWriteReleases>false</overWriteReleases>
-							<overWriteSnapshots>false</overWriteSnapshots>
+							<outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
 						</configuration>
 					</execution>
 				</executions>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
@@ -88,14 +92,16 @@
 					<archive>
 						<manifest>
 							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
 							<mainClass>nl.rufino.daw.view.MainView</mainClass>
 						</manifest>
 						<manifestEntries>
-							<Class-Path>lib/</Class-Path>
+							<Class-Path>${project.build.directory}/classes/lib</Class-Path>
 						</manifestEntries>
 					</archive>
 				</configuration>
 			</plugin>
+			
 		</plugins>
 	</build>
 </project>

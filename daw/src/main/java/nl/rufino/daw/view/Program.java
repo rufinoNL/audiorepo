@@ -24,9 +24,9 @@ import nl.rufino.daw.data.entity.MusicEntity;
 import nl.rufino.util.AudioFunctions;
 import nl.rufino.util.WindowsFunctions;
 
-public class MainView extends Application implements EventHandler<ActionEvent>{
+public class Program extends Application implements EventHandler<ActionEvent>{
 	
-	static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
+	static final Logger LOGGER = LoggerFactory.getLogger(Program.class);
 	private Label lblMessages;
 	private Button btnStartCubaseReason;
 	private TableView<MusicEntity> musicTable = new TableView<MusicEntity>();
