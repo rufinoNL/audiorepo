@@ -59,7 +59,7 @@ public class MainView extends Application implements EventHandler<ActionEvent>{
 	}
 		
 	@Override
-	public void handle(ActionEvent arg0) {
+	public void handle(ActionEvent event) {
 		message("Copying template and creating new folder");
 		File[] filesToStart = AudioFunctions.createNewTemplate();
 		
