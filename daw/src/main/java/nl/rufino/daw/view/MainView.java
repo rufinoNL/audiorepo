@@ -26,7 +26,6 @@ import nl.rufino.util.WindowsFunctions;
 public class MainView extends Application implements EventHandler<ActionEvent>{
 	static final Logger LOGGER = LoggerFactory.getLogger(MainView.class);
 	
-//  Currently commented out because database offline
 //	private EntityManagerFactory emf = Persistence.createEntityManagerFactory("daw_data");
 //	private EntityManager em = emf.createEntityManager();
 	
@@ -36,7 +35,6 @@ public class MainView extends Application implements EventHandler<ActionEvent>{
 	//private MainViewData data = new MainViewData(em);
 	private TableView<MusicEntity> musicTable;
 
-	//Start program
 	public static void main(String[] args) {
 		launch(args);
 	}

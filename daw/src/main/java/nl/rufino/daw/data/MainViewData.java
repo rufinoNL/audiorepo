@@ -19,7 +19,6 @@ public class MainViewData {
 		this.em = em;
 	}
 	
-	//Testing git repo via SoureTree
 	public ObservableList<MusicEntity> getMusic(){
 		ObservableList<MusicEntity> musicList = FXCollections.observableArrayList();
 		Query queryFindAll = em.createNamedQuery("MusicEntity.findAll");
