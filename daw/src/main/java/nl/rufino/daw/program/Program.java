@@ -76,9 +76,9 @@ public class Program extends Application implements EventHandler<ActionEvent>{
 			message("");
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			LOGGER.error("",e);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			LOGGER.error("",e);
 		}
 	}
 	
