@@ -68,6 +68,7 @@ public class Program extends Application implements EventHandler<ActionEvent>{
 			WindowsFunctions.startApplication(audioApplicationCubase, 
 					filesToStart[0].toString());
 			
+			//TODO: why?
 			Thread.sleep(25000);
 			
 			message("Starting Reason...");
