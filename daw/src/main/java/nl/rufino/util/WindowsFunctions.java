@@ -23,7 +23,7 @@ public class WindowsFunctions {
 			FileUtils.copyDirectory(sourceDirectory, destinationDirectory);
 			LOGGER.info("Template copying complete");
 		} catch (IOException e) {
-			LOGGER.error("Problems copying file: " + e);
+			LOGGER.error("Problems copying file" + e);
 		}
 	}
 	
@@ -34,14 +34,13 @@ public class WindowsFunctions {
 			LOGGER.info("File " + fileToOpen.getName() + " has been read.");
 
 		} catch (IOException e) {
-			LOGGER.error("Problems opening file: " + e);
+			LOGGER.error("Problems opening file" + e);
 		}
 		
 		return fileRead;
 	}
 	
 	public static void startApplication(String executablePath, String fileToOpen) throws IOException{
-		//Start program
 		new ProcessBuilder(executablePath, fileToOpen).start();
 	}
 	
