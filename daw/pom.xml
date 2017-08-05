@@ -13,9 +13,11 @@
 	</parent>
 
 	<properties>
-		<jdk.version>1.8</jdk.version>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.build.timestamp.format>yyyyMMdd_HHmmss</maven.build.timestamp.format>
 		<daw.dir>C:\DAW_Automation</daw.dir>
+		<mainClass>nl.rufino.daw.program.Program</mainClass>
 	</properties>
 
 	<dependencies>
@@ -51,77 +53,39 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>3.0.0</version>
-				<executions>
-					<execution>
-						<id>copy-dependencies</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
+	<profiles>
+		<profile>
+			<id>assembly</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-assembly-plugin</artifactId>
+						<version>3.0.0</version>
 						<configuration>
-							<outputDirectory>${project.build.directory}/classes/lib</outputDirectory>
-							<overWriteReleases>true</overWriteReleases>
-							<overWriteSnapshots>true</overWriteSnapshots>
-							<overWriteIfNewer>true</overWriteIfNewer>
+							<archive>
+								<manifest>
+									<mainClass>${mainClass}</mainClass>
+								</manifest>
+							</archive>
+							<descriptorRefs>
+								<descriptorRef>jar-with-dependencies</descriptorRef>
+							</descriptorRefs>
 						</configuration>
-					</execution>
-					<execution>
-						<id>copy-jar</id>
-						<phase>verify</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${daw.dir}</outputDirectory>
-							<artifactItems>
-								<artifactItem>
-									<groupId>nl.rufino.daw</groupId>
-									<artifactId>daw</artifactId>
-									<version>${project.version}</version>
-									<type>jar</type>
-									<overWrite>true</overWrite>
-									<outputDirectory>${daw.dir}</outputDirectory>
-									<destFileName>${project.build.finalName}-${maven.build.timestamp}.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>nl.rufino.daw.program.Program</mainClass>
-						</manifest>
-						<manifestEntries>
-							<Class-Path>${project.build.directory}/classes/lib</Class-Path>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>single</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
