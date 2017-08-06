@@ -40,8 +40,10 @@ public class WindowsFunctions {
 		return fileRead;
 	}
 	
-	public static void startApplication(String executablePath, String fileToOpen) throws IOException{
-		new ProcessBuilder(executablePath, fileToOpen).start();
+	public static void startApplication(String executablePath, File fileToOpen) throws IOException{
+		String path = fileToOpen.getPath();
+		
+		new ProcessBuilder(executablePath, path).start();
 	}
 	
 	public static Properties retrieveProperties(String fileName){

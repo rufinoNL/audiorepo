@@ -65,15 +65,13 @@ public class Program extends Application implements EventHandler<ActionEvent>{
 		
 		try {
 			message("Starting Cubase...");
-			WindowsFunctions.startApplication(audioApplicationCubase, 
-					filesToStart[0].toString());
+			WindowsFunctions.startApplication(audioApplicationCubase, filesToStart[0]);
 			
 			//TODO: why?
 			Thread.sleep(25000);
 			
 			message("Starting Reason...");
-			WindowsFunctions.startApplication(audioApplicationReason, 
-					filesToStart[1].toString());
+			WindowsFunctions.startApplication(audioApplicationReason, filesToStart[1]);
 			message("");
 			
 		} catch (IOException e) {
@@ -84,7 +82,6 @@ public class Program extends Application implements EventHandler<ActionEvent>{
 	}
 	
 	private void setupView() {
-		//Set style
 		FlatterFX.style();
 		configureLabelForMessages();
 		configureStartButton();
