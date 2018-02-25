@@ -14,14 +14,9 @@ public class AudioFunctions {
 	
 	static final Logger LOGGER = LoggerFactory.getLogger(AudioFunctions.class);
 	
-	public static File[] createNewTemplate(){
+	public static File[] createNewTemplate(String searchDirectory, String templateDirectory, String templateYear){
 		LOGGER.info("Started");
-		
-		Properties propertiesFile = WindowsFunctions.retrieveProperties("config.properties");
-		String searchDirectory = propertiesFile.getProperty("audio.searchdirectory");
-		String templateDirectory = propertiesFile.getProperty("audio.templatedirectory");
-		String templateYear = propertiesFile.getProperty("audio.templateyear");
-		
+				
 		String newBeatNumber;
 		File searchDir = new File(searchDirectory);
 		File srcDir = new File(templateDirectory);

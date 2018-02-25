@@ -32,11 +32,11 @@ public class Program extends Application implements EventHandler<ActionEvent>{
 	private TableView<MusicEntity> musicTable = new TableView<MusicEntity>();
 	private String audioApplicationReason = WindowsFunctions.retrieveProperties("config.properties").getProperty("audio.application.reason");
 	private String audioApplicationCubase = WindowsFunctions.retrieveProperties("config.properties").getProperty("audio.application.cubase");
+	private Properties propertiesFile = WindowsFunctions.retrieveProperties("config.properties");
 	
 	//private EntityManagerFactory emf = Persistence.createEntityManagerFactory("daw_data");
 	//private EntityManager em = emf.createEntityManager();
 	//private MainViewData data = new MainViewData(em);
-
 
 	public static void main(String[] args) {
 		launch(args);
@@ -61,7 +61,11 @@ public class Program extends Application implements EventHandler<ActionEvent>{
 	@Override
 	public void handle(ActionEvent event) {
 		message("Copying template and creating new folder");
-		File[] filesToStart = AudioFunctions.createNewTemplate();
+		String searchDirectory = propertiesFile.getProperty("audio.searchdirectory");
+		String templateDirectory = propertiesFile.getProperty("audio.templatedirectory");
+		String templateYear = propertiesFile.getProperty("audio.templateyear");
+		
+		File[] filesToStart = AudioFunctions.createNewTemplate(searchDirectory, templateDirectory, templateYear);
 		
 		try {
 			message("Starting Cubase...");
