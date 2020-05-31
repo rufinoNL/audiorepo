@@ -9,3 +9,7 @@ Maak een runnable jar en replace de oude steeds.
 4. C:\DAW_Automation\DAW_Automation_Rufino_[YYYY].jar
 5. "Extract required..."
 6. Finish
+
+Vanaf 2020:
+
+Geen Rewire meer, maar Reason 11 als plugin
